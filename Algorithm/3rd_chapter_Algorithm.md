@@ -200,6 +200,49 @@ PyTorch.
 
 #### Algorithm selection
 
+- **PPO - on policy**
+- **SAC - off policy**
+- **MA-POCA**
 
+##### PPO(Proximal Policy Optimization)
+
+Proximal Policy Optimization or PPO, is a policy gradient method for reinforcement learning. The motivation was to have an algorithm with the data efficiency and reliable performance of [TRPO](https://paperswithcode.com/method/trpo), while using only first-order optimization. 
+
+Let $r\_{t}\left(\theta\right)$ denote the probability ratio $r\_{t}\left(\theta\right) = \frac{\pi\_{\theta}\left(a\_{t}\mid{s\_{t}}\right)}{\pi\_{\theta\_{old}}\left(a\_{t}\mid{s\_{t}}\right)}$, so $r\left(\theta\_{old}\right) = 1$. TRPO maximizes a “surrogate” objective:
+
+$$ L^{\text{CPI}}\left({\theta}\right) = \hat{\mathbb{E}}\_{t}\left[\frac{\pi\_{\theta}\left(a\_{t}\mid{s\_{t}}\right)}{\pi\_{\theta\_{old}}\left(a\_{t}\mid{s\_{t}}\right)})\hat{A}\_{t}\right] = \hat{\mathbb{E}}\_{t}\left[r\_{t}\left(\theta\right)\hat{A}\_{t}\right] $$
+
+Where $CPI$ refers to a conservative policy iteration. Without a constraint, maximization of $L^{CPI}$ would lead to an excessively large policy update; hence, we PPO modifies the objective, to penalize changes to the policy that move $r\_{t}\left(\theta\right)$ away from 1:
+
+$$ J^{\text{CLIP}}\left({\theta}\right) = \hat{\mathbb{E}}\_{t}\left[\min\left(r\_{t}\left(\theta\right)\hat{A}\_{t}, \text{clip}\left(r\_{t}\left(\theta\right), 1-\epsilon, 1+\epsilon\right)\hat{A}\_{t}\right)\right] $$
+
+where $\epsilon$ is a hyperparameter, say, $\epsilon = 0.2$. The motivation for this objective is as follows. The first term inside the min is $L^{CPI}$. The second term, $\text{clip}\left(r\_{t}\left(\theta\right), 1-\epsilon, 1+\epsilon\right)\hat{A}\_{t}$ modifies the surrogate
+objective by clipping the probability ratio, which removes the incentive for moving $r\_{t}$ outside of the interval $\left[1 − \epsilon, 1 + \epsilon\right]$. Finally, we take the minimum of the clipped and unclipped objective, so the final objective is a lower bound (i.e., a pessimistic bound) on the unclipped objective. With this scheme, we only ignore the change in probability ratio when it would make the objective improve, and we include it when it makes the objective worse. 
+
+One detail to note is that when we apply PPO for a network where we have shared parameters for actor and critic functions, we typically add to the objective function an error term on value estimation and an entropy term to encourage exploration.
+
+#### SAC(Soft Actor Critic)
+
+Soft Actor Critic, or SAC, is an off-policy actor-critic deep RL algorithm based on the maximum entropy reinforcement learning framework. In this framework, the actor aims to maximize expected reward while also maximizing entropy. That is, to succeed at the task while acting as randomly as possible. Prior deep RL methods based on this framework have been formulated as Q-learning methods. SAC combines off-policy updates with a stable stochastic actor-critic formulation.
+
+The SAC objective has a number of advantages. First, the policy is incentivized to explore more widely, while giving up on clearly unpromising avenues. Second, the policy can capture multiple modes of near-optimal behavior. In problem settings where multiple actions seem equally attractive, the policy will commit equal probability mass to those actions. Lastly, the authors present evidence that it improves learning speed over state-of-art methods that optimize the conventional RL objective function.
+
+#### MA-POCA(Multi-Agent POsthumous Credit Assignment)
+
+MA-POCA is a new algorithm and trainer builds on previous work in multi-agent cooperative learning(Reference: ***Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments*** and ***Counterfactual Multi-Agent Policy Gradients***)  
+
+
+<center class="half">
+    <img src="MADDPG.png" width="400"/>
+    <img src="COMAPG.png" width="430">
+    COMAPG Algorithm and MADDPG Algorithm
+</center>
+
+
+
+<!-- ![Multi-Agent Deep Deterministic Policy Gradient Algorithm](MADDPG.png)![Counterfactual Multi-Agent (COMA) Policy Gradients Algorithm](COMA.png) -->
+
+MA-POCA was released at the end of the implementation for this work. While this work was written, a research
+paper has not yet been published.  
 
 #### Algorithm improvement
