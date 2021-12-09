@@ -3,13 +3,13 @@
 Master graduation Project Beta version.  
 AOA-AI-DRL -  automatic obstacle avoidance AI based on deep and reinforcement learning  
 
-This is a project that allows to train an AI able to drive alongside any track built from pre-defined pieces.
+<!-- This is a project that allows to train an AI able to drive alongside any track built from pre-defined pieces. -->
 
-![Self-tought AI on a race track](https://miro.medium.com/max/800/1*IkRIQavCAPI96PH3XE36xQ.gif)
+<!-- ![Self-tought AI on a race track](https://miro.medium.com/max/800/1*IkRIQavCAPI96PH3XE36xQ.gif) -->
 
 ## Requirements
 
-This project needs the ML-Agents environment version 0.15.0 to be set up. I suggest to follow the [official installation guide](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Installation.md). However the following steps should suffice:
+<!-- This project needs the ML-Agents environment version 0.15.0 to be set up. I suggest to follow the [official installation guide](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Installation.md). However the following steps should suffice: -->
 
 1. Get Python 3.6 64-bit (the 64 bit seems necessary, at least on Windows)
 2. Get Unity 2019.2+
