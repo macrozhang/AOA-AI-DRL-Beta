@@ -204,6 +204,8 @@ PyTorch.
 - **SAC - off policy**
 - **MA-POCA**
 
+#### Algorithm improvement
+
 ##### PPO(Proximal Policy Optimization)
 
 Proximal Policy Optimization or PPO, is a policy gradient method for reinforcement learning. The motivation was to have an algorithm with the data efficiency and reliable performance of [TRPO](https://paperswithcode.com/method/trpo), while using only first-order optimization. 
@@ -245,4 +247,5 @@ MA-POCA is a new algorithm and trainer builds on previous work in multi-agent co
 MA-POCA was released at the end of the implementation for this work. While this work was written, a research
 paper has not yet been published.  
 
-#### Algorithm improvement
+
+#### Algorithm improvement  asd 
